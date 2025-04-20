@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About - {{ company.name }}</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        .page-header {
+            background-color: #007bff;
+            color: white;
+            padding: 60px 0;
+            margin-bottom: 40px;
+        }
+        .team-member {
+            transition: transform 0.3s;
+            margin-bottom: 30px;
+        }
+        .team-member:hover {
+            transform: translateY(-5px);
+        }
+        .timeline {
+            position: relative;
+            padding: 0;
+            list-style: none;
+        }
+        .timeline:before {
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            left: 40px;
+            width: 2px;
+            margin-left: -1.5px;
+            content: '';
+            background-color: #e9ecef;
+        }
+        .timeline > li {
+            position: relative;
+            min-height: 50px;
+            margin-bottom: 50px;
+        }
+        .timeline > li:after, .timeline > li:before {
+            display: table;
+            content: ' ';
+        }
+        .timeline > li:after {
+            clear: both;
+        }
+        .timeline > li .timeline-panel {
+            position: relative;
+            float: right;
+            width: calc(100% - 90px);
+            padding: 0 20px 0 100px;
+            text-align: left;
+        }
+        .timeline > li .timeline-image {
+            position: absolute;
+            z-index: 100;
+            left: 0;
+            width: 80px;
+            height: 80px;
+            margin-left: 0;
+            text-align: center;
+            color: white;
+            border: 7px solid #e9ecef;
+            border-radius: 100%;
+            background-color: #007bff;
+        }
+        .timeline > li .timeline-image h4 {
+            font-size: 16px;
+            line-height: 18px;
+            margin-top: 22px;
+        }
+        footer {
+            background-color: #343a40;
+            color: white;
+            padding: 30px 0;
+            margin-top: 50px;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container">
+            <a class="navbar-brand" href="/">{{ company.name }}</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="/about">About</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/services">Services</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/contact">Contact</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Page Header -->
+    <header class="page-header">
+        <div class="container text-center">
+            <h1 class="display-4">About Us</h1>
+            <p class="lead">Learn more about {{ company.name }} and our journey</p>
+        </div>
+    </header>
+
+    <!-- Company Story Section -->
+    <section class="container my-5">
+        <div class="row">
+            <div class="col-lg-8 mx-auto">
+                <h2 class="text-center mb-4">Our Story</h2>
+                <p class="lead">{{ company.about }}</p>
+                <p>Founded in {{ company.founded }}, {{ company.name }} has grown from a small startup to a team of {{ company.employees }} dedicated professionals. Our mission is to deliver innovative technology solutions that help businesses thrive in the digital age.</p>
+                <p>We believe in combining technical excellence with creative thinking, allowing us to solve complex problems with elegant solutions. Our client-centered approach ensures that we not only meet but exceed expectations, building long-lasting partnerships along the way.</p>
+                <p>What sets us apart is our commitment to staying at the forefront of technological advancement while maintaining a human touch in everything we do. We're not just building software; we're creating experiences that make a difference.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Company Timeline -->
+    <section class="container my-5">
+        <h2 class="text-center mb-5">Our Journey</h2>
+        <ul class="timeline">
+            <li>
+                <div class="timeline-image">
+                    <h4>{{ company.founded }}</h4>
+                </div>
+                <div class="timeline-panel">
+                    <div class="timeline-heading">
+                        <h4>Foundation</h4>
+                    </div>
+                    <div class="timeline-body">
+                        <p>{{ company.name }} was founded with a vision to provide innovative tech solutions to businesses of all sizes.</p>
+                    </div>
+                </div>
+            </li>
+            <li>
+                <div class="timeline-image">
+                    <h4>{{ company.founded + 2 }}</h4>
+                </div>
+                <div class="timeline-panel">
+                    <div class="timeline-heading">
+                        <h4>Expansion</h4>
+                    </div>
+                    <div class="timeline-body">
+                        <p>We expanded our service offerings and doubled our team size to better serve our growing client base.</p>
+                    </div>
+                </div>
+            </li>
+            <li>
+                <div class="timeline-image">
+                    <h4>{{ company.founded + 5 }}</h4>
+                </div>
+                <div class="timeline-panel">
+                    <div class="timeline-heading">
+                        <h4>Innovation</h4>
+                    </div>
+                    <div class="timeline-body">
+                        <p>Launched our proprietary development framework, significantly enhancing our project delivery efficiency.</p>
+                    </div>
+                </div>
+            </li>
+            <li>
+                <div class="timeline-image">
+                    <h4>Today</h4>
+                </div>
+                <div class="timeline-panel">
+                    <div class="timeline-heading">
+                        <h4>Current Chapter</h4>
+                    </div>
+                    <div class="timeline-body">
+                        <p>Today, we continue to grow and innovate, with {{ company.employees }} team members working on cutting-edge projects for clients worldwide.</p>
+                    </div>
+                </div>
+            </li>
+        </ul>
+    </section>
+
+    <!-- Team Section -->
+    <section class="container my-5">
+        <h2 class="text-center mb-4">Our Leadership Team</h2>
+        <div class="row">
+            {% for member in team %}
+            <div class="col-md-4">
+                <div class="card team-member">
+                    <div class="card-body text-center">
+                        <img src="https://via.placeholder.com/150" alt="{{ member.name }}" class="rounded-circle mb-3">
+                        <h4 class="card-title">{{ member.name }}</h4>
+                        <p class="card-subtitle text-muted mb-2">{{ member.position }}</p>
+                        <p class="card-text">{{ member.bio }}</p>
+                        <div class="mt-3">
+                            <a href="#" class="btn btn-outline-dark btn-sm mx-1"><i class="fab fa-linkedin"></i></a>
+                            <a href="#" class="btn btn-outline-dark btn-sm mx-1"><i class="fab fa-twitter"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </section>
+
+    <!-- Values Section -->
+    <section class="container my-5">
+        <h2 class="text-center mb-4">Our Values</h2>
+        <div class="row">
+            <div class="col-md-4 mb-4">
+                <div class="card h-100">
+                    <div class="card-body text-center">
+                        <i class="fas fa-handshake fa-3x mb-3 text-primary"></i>
+                        <h4 class="card-title">Integrity</h4>
+                        <p class="card-text">We believe in honesty, transparency, and doing what's right, even when no one is watching.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 mb-4">
+                <div class="card h-100">
+                    <div class="card-body text-center">
+                        <i class="fas fa-lightbulb fa-3x mb-3 text-primary"></i>
+                        <h4 class="card-title">Innovation</h4>
+                        <p class="card-text">We constantly push boundaries and embrace new technologies to provide cutting-edge solutions.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 mb-4">
+                <div class="card h-100">
+                    <div class="card-body text-center">
+                        <i class="fas fa-users fa-3x mb-3 text-primary"></i>
+                        <h4 class="card-title">Collaboration</h4>
+                        <p class="card-text">We believe in the power of teamwork and partnership to achieve remarkable results.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="text-center">
+        <div class="container">
+            <p>&copy; {{ company.founded }}-2025 {{ company.name }}. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

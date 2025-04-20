@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact - {{ company.name }}</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        .page-header {
+            background-color: #007bff;
+            color: white;
+            padding: 60px 0;
+            margin-bottom: 40px;
+        }
+        .contact-info-card {
+            transition: transform 0.3s;
+            margin-bottom: 20px;
+        }
+        .contact-info-card:hover {
+            transform: translateY(-5px);
+        }
+        .contact-icon {
+            font-size: 2rem;
+            color: #007bff;
+            margin-bottom: 15px;
+        }
+        .map-container {
+            height: 400px;
+            margin-bottom: 30px;
+            background-color: #e9ecef;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        footer {
+            background-color: #343a40;
+            color: white;
+            padding: 30px 0;
+            margin-top: 50px;
+        }
+        .alert {
+            margin-bottom: 30px;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container">
+            <a class="navbar-brand" href="/">{{ company.name }}</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/about">About</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/services">Services</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="/contact">Contact</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Page Header -->
+    <header class="page-header">
+        <div class="container text-center">
+            <h1 class="display-4">Contact Us</h1>
+            <p class="lead">Get in touch with our team</p>
+        </div>
+    </header>
+
+    <!-- Contact Form Section -->
+    <section class="container my-5">
+        <div class="row">
+            <div class="col-lg-8">
+                <h2 class="mb-4">Send Us a Message</h2>
+                
+                {% if message_sent %}
+                <div class="alert alert-success" role="alert">
+                    Thank you for your message! We'll get back to you soon.
+                </div>
+                {% endif %}
+                
+                <form action="/contact" method="post">
+                    <div class="row mb-3">
+                        <div class="col-md-6 mb-3 mb-md-0">
+                            <label for="name" class="form-label">Name</label>
+                            <input type="text" class="form-control" id="name" name="name" required>
+                        </div>
+                        <div class="col-md-6">
+                            <label for="email" class="form-label">Email</label>
+                            <input type="email" class="form-control" id="email" name="email" required>
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <label for="subject" class="form-label">Subject</label>
+                        <input type="text" class="form-control" id="subject" name="subject" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="message" class="form-label">Message</label>
+                        <textarea class="form-control" id="message" name="message" rows="5" required></textarea>
+                    </div>
+                    <div class="mb-3">
+                        <label for="service" class="form-label">Service of Interest</label>
+                        <select class="form-select" id="service" name="service">
+                            <option value="" selected>Select a service</option>
+                            {% for service in services %}
+                            <option value="{{ service.id }}">{{ service.name }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Send Message</button>
+                </form>
+            </div>
+            <div class="col-lg-4">
+                <h2 class="mb-4">Contact Information</h2>
+                <div class="card contact-info-card mb-4">
+                    <div class="card-body text-center">
+                        <i class="fas fa-map-marker-alt contact-icon"></i>
+                        <h5>Our Office</h5>
+                        <p class="mb-0">{{ contact.address }}</p>
+                    </div>
+                </div>
+                <div class="card contact-info-card mb-4">
+                    <div class="card-body text-center">
+                        <i class="fas fa-phone contact-icon"></i>
+                        <h5>Phone</h5>
+                        <p class="mb-0">{{ contact.phone }}</p>
+                    </div>
+                </div>
+                <div class="card contact-info-card mb-4">
+                    <div class="card-body text-center">
+                        <i class="fas fa-envelope contact-icon"></i>
+                        <h5>Email</h5>
+                        <p class="mb-0">{{ contact.email }}</p>
+                    </div>
+                </div>
+                <h5 class="mt-4 mb-3">Follow Us</h5>
+                <div class="d-flex justify-content-around">
+                    <a href="{{ contact.social_media.twitter }}" class="btn btn-outline-dark"><i class="fab fa-twitter"></i></a>
+                    <a href="{{ contact.social_media.linkedin }}" class="btn btn-outline-dark"><i class="fab fa-linkedin"></i></a>
+                    <a href="{{ contact.social_media.facebook }}" class="btn btn-outline-dark"><i class="fab fa-facebook"></i></a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Map Section -->
+    <section class="container my-5">
+        <h2 class="mb-4">Our Location</h2>
+        <div class="map-container">
+            <p class="text-center">Map placeholder - In a real application, this would be an embedded Google Map or similar service.</p>
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section class="container my-5">
+        <h2 class="mb-4">Frequently Asked Questions</h2>
+        <div class="accordion" id="contactFAQ">
+            <div class="accordion-item">
+                <h2 class="accordion-header" id="headingOne">
+                    <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                        What is your typical response time?
+                    </button>
+                </h2>
+                <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#contactFAQ">
+                    <div class="accordion-body">
+                        We typically respond to all inquiries within 24 business hours. For urgent matters, please call our office directly.
+                    </div>
+                </div>
+            </div>
+            <div class="accordion-item">
+                <h2 class="accordion-header" id="headingTwo">
+                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                        Do you offer free consultations?
+                    </button>
+                </h2>
+                <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#contactFAQ">
+                    <div class="accordion-body">
+                        Yes, we offer a free initial consultation to discuss your project needs and how we can help. This can be scheduled in-person, via phone, or video conference.
+                    </div>
+                </div>
+            </div>
+            <div class="accordion-item">
+                <h2 class="accordion-header" id="headingThree">
+                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                        What information should I prepare before contacting you?
+                    </button>
+                </h2>
+                <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree" data-bs-parent="#contactFAQ">
+                    <div class="accordion-body">
+                        To make our initial discussion more productive, it helps to have a basic overview of your project goals, timeline, budget range, and any specific requirements or challenges you're facing.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="
